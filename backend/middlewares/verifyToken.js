@@ -25,7 +25,6 @@ const verifyTokenAdmin = (req, res, next) => {
         jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
             if (err) return res.status(403).json({ msg: "Wrong or expired token." })
             else {
-                // data = {id: user._id, isAdmin: user.isAdmin}
                 if (!data.isAdmin) return res.status(403).json({ msg: "You are not admin" })
                 req.user = data
                 next()
